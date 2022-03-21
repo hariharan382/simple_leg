@@ -1,0 +1,142 @@
+<?xml version="1.0" ?>
+<robot name="leg_trial" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find leg_trial_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find leg_trial_description)/urdf/leg_trial.trans" />
+<xacro:include filename="$(find leg_trial_description)/urdf/leg_trial.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.002105211243413883 0.0004319974773647484 0.08657753239337528"/>
+    <mass value="0.14234750527522502"/>
+    <inertia ixx="0.000314" ixy="-1e-06" ixz="-1.7e-05" iyy="0.000317" iyz="-3e-06" izz="6e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://leg_trial_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://leg_trial_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hip_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.021308988284395168 -0.0062542363221017245 -0.00037552538765514565"/>
+    <mass value="0.04969315621284487"/>
+    <inertia ixx="3e-06" ixy="2e-06" ixz="0.0" iyy="1.2e-05" iyz="-0.0" izz="1.2e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.013 0.005 -0.142"/>
+    <geometry>
+      <mesh filename="package://leg_trial_description/meshes/hip_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.013 0.005 -0.142"/>
+    <geometry>
+      <mesh filename="package://leg_trial_description/meshes/hip_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="thigh_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.01042199486148579 -6.938893903907228e-18 -0.03268855519669914"/>
+    <mass value="0.05640363849053903"/>
+    <inertia ixx="3e-05" ixy="0.0" ixz="-1e-06" iyy="2.9e-05" iyz="-0.0" izz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.044995 0.019856 -0.141436"/>
+    <geometry>
+      <mesh filename="package://leg_trial_description/meshes/thigh_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.044995 0.019856 -0.141436"/>
+    <geometry>
+      <mesh filename="package://leg_trial_description/meshes/thigh_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0027517692235868516 -0.029313365547886765 -0.014085206878428118"/>
+    <mass value="0.0523961443618034"/>
+    <inertia ixx="2.6e-05" ixy="-0.0" ixz="-0.0" iyy="6e-06" iyz="-9e-06" izz="2.1e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.045095 0.019856 -0.076424"/>
+    <geometry>
+      <mesh filename="package://leg_trial_description/meshes/leg_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.045095 0.019856 -0.076424"/>
+    <geometry>
+      <mesh filename="package://leg_trial_description/meshes/leg_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="foot_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.000999852652376676 2.6892503753039865e-07 -1.7343760567133104e-05"/>
+    <mass value="0.0026985093513919246"/>
+    <inertia ixx="0.0" ixy="0.0" ixz="-0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.050599 0.078483 -0.048253"/>
+    <geometry>
+      <mesh filename="package://leg_trial_description/meshes/foot_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.050599 0.078483 -0.048253"/>
+    <geometry>
+      <mesh filename="package://leg_trial_description/meshes/foot_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="hip_joint" type="revolute">
+  <origin rpy="0 0 0" xyz="0.013 -0.005 0.142"/>
+  <parent link="base_link"/>
+  <child link="hip_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit effort="100" lower="0.017453" upper="0.785398" velocity="100"/>
+</joint>
+
+<joint name="femur_joint" type="revolute">
+  <origin rpy="0 0 0" xyz="0.031995 -0.014856 -0.000564"/>
+  <parent link="hip_1"/>
+  <child link="thigh_1"/>
+  <axis xyz="0.999845 0.0 -0.01762"/>
+  <limit effort="100" lower="-1.570796" upper="1.570796" velocity="100"/>
+</joint>
+
+<joint name="tibia_joint" type="revolute">
+  <origin rpy="0 0 0" xyz="0.0001 0.0 -0.065012"/>
+  <parent link="thigh_1"/>
+  <child link="leg_1"/>
+  <axis xyz="-0.999845 -0.0 0.01762"/>
+  <limit effort="100" lower="-1.570796" upper="1.570796" velocity="100"/>
+</joint>
+
+<joint name="Rigid8" type="fixed">
+  <origin rpy="0 0 0" xyz="0.005504 -0.058627 -0.028171"/>
+  <parent link="leg_1"/>
+  <child link="foot_1"/>
+</joint>
+
+</robot>

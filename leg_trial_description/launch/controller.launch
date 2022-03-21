@@ -1,0 +1,9 @@
+<launch>
+
+<rosparam file="$(find leg_trial_description)/launch/controller.yaml" command="load"/>
+<node args="hip_joint_position_controller femur_joint_position_controller tibia_joint_position_controller joint_state_controller " name="controller_spawner" ns="leg_trial" output="screen" pkg="controller_manager" respawn="false" type="spawner"/>
+<node name="robot_state_publisher" output="screen" pkg="robot_state_publisher" respawn="false" type="robot_state_publisher">
+  <remap from="/joint_states" to="/leg_trial/joint_states"/>
+</node>
+
+</launch>
